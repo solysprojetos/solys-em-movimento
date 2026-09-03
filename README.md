@@ -1,63 +1,100 @@
-# Solys em Movimento
+# Solys em Movimento — Inscrição
 
-Landing page e formulário de inscrição para o evento **Solys em Movimento**.
-Site estático (HTML/CSS/JS), sem dependências de build, com backend serverless
-no [Supabase](https://supabase.com).
+Aplicação web de inscrição para o evento **Solys em Movimento**.
+Página única, focada em uma tarefa: preencher os dados, escolher o tamanho da
+camisa, autorizar o uso dos dados e confirmar a participação.
+
+Construída com **Next.js (App Router) + TypeScript + Tailwind CSS**, validação
+com **React Hook Form + Zod** (no cliente e no servidor) e persistência no
+**Supabase**.
 
 ## ✨ Funcionalidades
 
-- Landing page responsiva com hero, benefícios, formulário e FAQ
-- Formulário de inscrição com validação (nome, e-mail, telefone com máscara BR, tamanho de camisa)
-- Envio direto para o Supabase via REST (`inscricoes_movimento`)
-- Tela de confirmação com resumo da inscrição
-- Acessibilidade (labels, `aria-*`, foco visível, `prefers-reduced-motion`)
-- PWA-ready (manifest + ícone SVG)
+- Formulário de inscrição: nome, e-mail, telefone (máscara BR `(85) 99999-9999`)
+  e tamanho da camisa (PP a XXXG) em botões de seleção única.
+- Modal elegante com a **tabela de medidas**.
+- Checkbox de **consentimento** obrigatório (LGPD).
+- Validação profissional no **frontend e no backend** (mesmo schema Zod), com
+  erros exibidos abaixo de cada campo — sem `alert()`.
+- **Bloqueio de inscrições duplicadas** por e-mail e por telefone (índices
+  únicos no banco); mensagem: _"Sua inscrição já foi realizada anteriormente."_
+- Tela de **confirmação** com resumo da inscrição e a logo oficial da Solys.
+- Identidade visual oficial: azul-marinho + dourado, com card institucional.
+- **Responsivo** (mobile-first), acessível e sem rolagem horizontal.
 
 ## 📁 Estrutura
 
 ```
-.
-├── index.html                # marcação da página
-├── manifest.webmanifest      # metadados PWA
-├── robots.txt
-├── assets/
-│   ├── favicon.svg
-│   ├── css/styles.css        # design system + estilos
-│   └── js/
-│       ├── config.js         # configuração do Supabase (anon key pública)
-│       └── app.js            # validação, máscara, envio e UI
-└── .github/workflows/deploy.yml   # deploy automático no GitHub Pages
+src/
+├── app/
+│   ├── api/inscricoes/route.ts   # endpoint POST (valida + grava no Supabase)
+│   ├── globals.css               # base Tailwind + fundo institucional
+│   ├── icon.svg                  # favicon (marca Solys)
+│   ├── layout.tsx                # metadados, fontes, fundo
+│   └── page.tsx                  # página da inscrição
+├── components/
+│   ├── RegistrationCard.tsx      # formulário + estados (envio/sucesso)
+│   ├── SizeGuideModal.tsx        # tabela de medidas
+│   └── SolysLogo.tsx             # logo oficial
+└── lib/
+    ├── format.ts                 # máscara de telefone
+    ├── schema.ts                 # schema Zod (cliente + servidor)
+    └── supabase.ts               # cliente Supabase (servidor)
+public/                           # logos oficiais da Solys
+```
+
+## 🔐 Segurança e banco de dados
+
+Tabela: `inscricoes_movimento`
+
+| coluna          | tipo        |
+|-----------------|-------------|
+| id              | uuid (PK)   |
+| nome_completo   | text        |
+| email           | text        |
+| telefone        | text        |
+| tamanho_camisa  | text        |
+| consentimento   | boolean     |
+| created_at      | timestamptz |
+
+- **Row Level Security ativado.** Qualquer visitante pode **inserir** uma
+  inscrição, mas **ninguém consegue listar** as inscrições sem estar
+  autenticado como administrador. Por isso nenhuma credencial privada é
+  exposta — o app usa apenas a chave pública (anon).
+- Índices únicos em `lower(email)` e `telefone` evitam duplicidade.
+- `CHECK` garante que o tamanho da camisa é um valor válido.
+
+## ⚙️ Configuração
+
+Crie um arquivo `.env.local` (veja `.env.example`):
+
+```
+SUPABASE_URL=https://qozuvdhqhpzpreusvkkr.supabase.co
+SUPABASE_ANON_KEY=<chave anon do projeto>
+SUPABASE_TABLE=inscricoes_movimento
 ```
 
 ## 🚀 Rodando localmente
 
-Por ser um site estático, basta servir a pasta:
-
 ```bash
-python3 -m http.server 8000
-# abra http://localhost:8000
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-## 🌐 Publicação (GitHub Pages)
+Build de produção:
 
-O deploy é automático via GitHub Actions a cada push na branch `main`.
+```bash
+npm run build
+npm start
+```
 
-Para ativar (uma única vez):
+## ☁️ Deploy na Vercel
 
-1. No repositório, acesse **Settings → Pages**.
-2. Em **Build and deployment → Source**, selecione **GitHub Actions**.
-3. Faça merge para `main` — o workflow `Deploy to GitHub Pages` publica o site.
-
-A URL final será algo como
-`https://solysprojetos.github.io/solys-em-movimento/`.
-
-## 🔐 Sobre a chave do Supabase
-
-A `anon key` é **pública por natureza** — ela apenas identifica o projeto.
-A segurança vem das políticas de **Row Level Security (RLS)**: qualquer
-visitante pode **inserir** uma inscrição, mas somente o admin autenticado
-consegue **ler** os dados.
-
-## 🛠️ Configuração
-
-Edite `assets/js/config.js` para apontar para outro projeto/tabela do Supabase.
+1. Acesse [vercel.com/new](https://vercel.com/new) e importe o repositório
+   `solysprojetos/solys-em-movimento`.
+2. A Vercel detecta o Next.js automaticamente (nenhuma configuração extra).
+3. Em **Environment Variables**, adicione:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+   - `SUPABASE_TABLE` = `inscricoes_movimento`
+4. **Deploy**. Cada push para `main` gera um novo deploy automático.

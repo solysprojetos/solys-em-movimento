@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e7cd8f"/>
+      <stop offset="1" stop-color="#b08a35"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b4b96"/>
+      <stop offset="1" stop-color="#0a1f44"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="#071633"/>
+  <!-- prédio esquerdo -->
+  <path d="M24 40 L36 34 L36 74 L24 74 Z" fill="url(#blue)"/>
+  <!-- prédio direito -->
+  <path d="M76 40 L64 34 L64 74 L76 74 Z" fill="url(#blue)"/>
+  <!-- torre central dourada -->
+  <path d="M50 20 L60 30 L60 74 L40 74 L40 30 Z" fill="url(#gold)"/>
+  <!-- base/arco -->
+  <path d="M18 74 Q50 66 82 74 L82 80 Q50 73 18 80 Z" fill="url(#blue)"/>
+</svg>
