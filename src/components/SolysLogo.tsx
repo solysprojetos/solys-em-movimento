@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { asset } from "@/lib/asset";
 
 export function SolysLogo({
   className = "",
@@ -8,12 +8,14 @@ export function SolysLogo({
   priority?: boolean;
 }) {
   return (
-    <Image
-      src="/solys-logo.png"
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={asset("/solys-logo.png")}
       alt="Solys — Gestão Administrativa"
       width={625}
       height={507}
-      priority={priority}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
       className={className}
     />
   );

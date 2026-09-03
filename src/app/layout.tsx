@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
+import { asset } from "@/lib/asset";
 import "./globals.css";
 
 const inter = Inter({
@@ -65,7 +66,11 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${sora.variable}`}>
       <body>
         <div className="app-background" aria-hidden="true" />
-        <div className="movimento-art" aria-hidden="true" />
+        <div
+          className="movimento-art"
+          aria-hidden="true"
+          style={{ backgroundImage: `url(${asset("/solys-movimento-bg.png")})` }}
+        />
         {children}
       </body>
     </html>

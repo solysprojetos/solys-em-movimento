@@ -32,7 +32,6 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image: url("/solys-movimento-bg.png");
   background-repeat: no-repeat;
   background-position: center 12%;
   background-size: min(1100px, 130%) auto;
