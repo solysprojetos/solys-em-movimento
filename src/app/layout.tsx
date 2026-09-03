@@ -15,7 +15,12 @@ const sora = Sora({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://solysprojetos.github.io/solys-em-movimento";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Solys em Movimento | Inscrição",
   description:
     "Faça sua inscrição no Solys em Movimento. Preencha seus dados, escolha o tamanho da camisa e confirme sua participação.",

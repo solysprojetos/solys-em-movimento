@@ -88,13 +88,46 @@ npm run build
 npm start
 ```
 
-## ☁️ Deploy na Vercel
+## ☁️ Publicação (GitHub Pages)
 
-1. Acesse [vercel.com/new](https://vercel.com/new) e importe o repositório
-   `solysprojetos/solys-em-movimento`.
-2. A Vercel detecta o Next.js automaticamente (nenhuma configuração extra).
-3. Em **Environment Variables**, adicione:
-   - `SUPABASE_URL`
-   - `SUPABASE_ANON_KEY`
-   - `SUPABASE_TABLE` = `inscricoes_movimento`
-4. **Deploy**. Cada push para `main` gera um novo deploy automático.
+O site é **estático** (`output: "export"`) e publicado automaticamente pelo
+GitHub Actions (`.github/workflows/deploy.yml`) a cada push. O envio da
+inscrição vai direto do navegador para o Supabase usando a chave pública
+(anon) — protegido por RLS.
+
+- URL padrão: `https://solysprojetos.github.io/solys-em-movimento/`
+- O `actions/configure-pages` calcula o *base path* automaticamente (usa
+  `/solys-em-movimento` no domínio do GitHub e a raiz quando há domínio
+  próprio configurado).
+
+### Domínio próprio
+
+1. No GitHub: **Settings → Pages → Custom domain**, informe seu domínio e salve
+   (o GitHub grava o arquivo `CNAME` e emite o certificado HTTPS).
+2. Configure o DNS no seu provedor:
+
+   **Subdomínio** (ex.: `inscricao.seudominio.com.br`) — registro CNAME:
+
+   ```
+   Tipo: CNAME   Nome: inscricao   Valor: solysprojetos.github.io
+   ```
+
+   **Domínio raiz/apex** (ex.: `seudominio.com.br`) — registros A (IPv4):
+
+   ```
+   185.199.108.153
+   185.199.109.153
+   185.199.110.153
+   185.199.111.153
+   ```
+
+   e, opcionalmente, AAAA (IPv6):
+
+   ```
+   2606:50c0:8000::153
+   2606:50c0:8001::153
+   2606:50c0:8002::153
+   2606:50c0:8003::153
+   ```
+
+3. Aguarde a propagação do DNS e marque **Enforce HTTPS** em Settings → Pages.

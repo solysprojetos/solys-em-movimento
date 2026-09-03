@@ -3,8 +3,14 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { inscricaoSchema, TAMANHOS, type InscricaoInput } from "@/lib/schema";
+import {
+  inscricaoSchema,
+  TAMANHOS,
+  type InscricaoInput,
+  type InscricaoData,
+} from "@/lib/schema";
 import { formatarTelefone } from "@/lib/format";
+import { enviarInscricao } from "@/lib/inscrever";
 import { SolysLogo } from "./SolysLogo";
 import { SizeGuideModal } from "./SizeGuideModal";
 
@@ -27,7 +33,7 @@ export function RegistrationCard() {
     reset,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<InscricaoInput>({
+  } = useForm<InscricaoInput, unknown, InscricaoData>({
     resolver: zodResolver(inscricaoSchema),
     mode: "onTouched",
     defaultValues: {
@@ -39,36 +45,22 @@ export function RegistrationCard() {
     },
   });
 
-  async function onSubmit(dados: InscricaoInput) {
+  async function onSubmit(dados: InscricaoData) {
     setErroGeral(null);
-    try {
-      const resp = await fetch("/api/inscricoes", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dados),
+    const resultado = await enviarInscricao(dados);
+
+    if (resultado.ok) {
+      setSucesso({
+        nome: dados.nome,
+        email: dados.email,
+        telefone: formatarTelefone(dados.telefone),
+        tamanho: dados.tamanho,
       });
-      const json = await resp.json().catch(() => ({}));
-
-      if (resp.ok) {
-        setSucesso({
-          nome: (dados.nome || "").replace(/\s+/g, " ").trim(),
-          email: (dados.email || "").trim().toLowerCase(),
-          telefone: formatarTelefone(dados.telefone || ""),
-          tamanho: String(dados.tamanho),
-        });
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
-
-      setErroGeral(
-        json?.message ||
-          "Não conseguimos registrar sua inscrição agora. Tente novamente.",
-      );
-    } catch {
-      setErroGeral(
-        "Falha de conexão. Verifique sua internet e tente novamente.",
-      );
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
     }
+
+    setErroGeral(resultado.message);
   }
 
   function novaInscricao() {
