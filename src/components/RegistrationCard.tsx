@@ -12,7 +12,7 @@ import {
 import { formatarTelefone } from "@/lib/format";
 import { enviarInscricao } from "@/lib/inscrever";
 import { enviarConfirmacao } from "@/lib/enviarEmail";
-import { SolysLogo } from "./SolysLogo";
+import { BrandHeader } from "./BrandHeader";
 import { SizeGuideModal } from "./SizeGuideModal";
 
 type Enviado = {
@@ -79,9 +79,9 @@ export function RegistrationCard() {
         <div className="h-1.5 rounded-t-[28px] bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600" />
 
         <div className="px-6 py-8 sm:px-10 sm:py-10">
-          {/* Cabeçalho com a logo oficial */}
+          {/* Cabeçalho com as logos oficiais */}
           <header className="flex flex-col items-center text-center">
-            <SolysLogo priority className="h-16 w-auto sm:h-20" />
+            <BrandHeader />
           </header>
 
           {sucesso ? (
