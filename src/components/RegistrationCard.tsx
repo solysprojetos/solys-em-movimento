@@ -13,6 +13,7 @@ import { formatarTelefone } from "@/lib/format";
 import { enviarInscricao } from "@/lib/inscrever";
 import { enviarConfirmacao } from "@/lib/enviarEmail";
 import { BrandHeader } from "./BrandHeader";
+import { EventInfo } from "./EventInfo";
 import { SizeGuideModal } from "./SizeGuideModal";
 
 type Enviado = {
@@ -99,6 +100,8 @@ export function RegistrationCard() {
                   Preencha seus dados abaixo para confirmar sua participação.
                 </p>
               </div>
+
+              <EventInfo className="mt-6" />
 
               <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -346,6 +349,8 @@ function SuccessState({
         <Resumo termo="Telefone" valor={dados.telefone} />
         <Resumo termo="Camisa" valor={dados.tamanho} />
       </dl>
+
+      <EventInfo className="mx-auto mt-5 max-w-sm text-left" />
 
       <button
         type="button"
