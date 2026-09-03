@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/projeto-online-melhorado-nmpp5l
   workflow_dispatch:
 
 permissions:
