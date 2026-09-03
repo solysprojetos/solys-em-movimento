@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-navy-950 text-slate-100 antialiased;
+  min-height: 100dvh;
+}
+
+/* Fundo institucional: gradiente azul-marinho com brilho dourado sutil */
+.app-background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, rgba(27, 75, 150, 0.35), transparent 60%),
+    radial-gradient(50rem 35rem at 90% 0%, rgba(201, 162, 75, 0.14), transparent 60%),
+    radial-gradient(60rem 50rem at 50% 115%, rgba(14, 42, 94, 0.55), transparent 60%),
+    linear-gradient(180deg, #071633 0%, #040c1c 60%, #030913 100%);
+}
+
+/* Arte oficial "SOLYS EM MOVIMENTO" como marca d'água sutil ao fundo */
+.movimento-art {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/solys-movimento-bg.png");
+  background-repeat: no-repeat;
+  background-position: center 12%;
+  background-size: min(1100px, 130%) auto;
+  opacity: 0.5;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(60% 60% at 50% 30%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(60% 60% at 50% 30%, #000 55%, transparent 100%);
+}
+
+/* Remove aparência nativa dos números em inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #0a1f44;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
