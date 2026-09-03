@@ -21,10 +21,9 @@ body {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(60rem 40rem at 15% -10%, rgba(27, 75, 150, 0.35), transparent 60%),
-    radial-gradient(50rem 35rem at 90% 0%, rgba(201, 162, 75, 0.14), transparent 60%),
-    radial-gradient(60rem 50rem at 50% 115%, rgba(14, 42, 94, 0.55), transparent 60%),
-    linear-gradient(180deg, #071633 0%, #040c1c 60%, #030913 100%);
+    radial-gradient(55rem 40rem at 50% -10%, rgba(18, 42, 74, 0.35), transparent 62%),
+    radial-gradient(60rem 50rem at 50% 118%, rgba(10, 26, 52, 0.4), transparent 60%),
+    linear-gradient(180deg, #05080e 0%, #02040a 55%, #010205 100%);
 }
 
 /* Arte oficial "SOLYS EM MOVIMENTO" como marca d'água sutil ao fundo */
@@ -35,7 +34,7 @@ body {
   background-repeat: no-repeat;
   background-position: center 12%;
   background-size: min(1100px, 130%) auto;
-  opacity: 0.5;
+  opacity: 0.62;
   pointer-events: none;
   -webkit-mask-image: radial-gradient(60% 60% at 50% 30%, #000 55%, transparent 100%);
   mask-image: radial-gradient(60% 60% at 50% 30%, #000 55%, transparent 100%);
