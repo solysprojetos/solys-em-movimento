@@ -11,6 +11,7 @@ import {
 } from "@/lib/schema";
 import { formatarTelefone } from "@/lib/format";
 import { enviarInscricao } from "@/lib/inscrever";
+import { enviarConfirmacao } from "@/lib/enviarEmail";
 import { SolysLogo } from "./SolysLogo";
 import { SizeGuideModal } from "./SizeGuideModal";
 
@@ -50,6 +51,8 @@ export function RegistrationCard() {
     const resultado = await enviarInscricao(dados);
 
     if (resultado.ok) {
+      // Envia o e-mail de confirmação (best-effort, não bloqueia o sucesso)
+      void enviarConfirmacao(dados.nome, dados.email);
       setSucesso({
         nome: dados.nome,
         email: dados.email,
