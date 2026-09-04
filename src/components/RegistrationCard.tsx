@@ -96,12 +96,11 @@ export function RegistrationCard() {
                 <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-navy-800 sm:text-4xl">
                   Solys em Movimento
                 </h1>
-                <p className="mt-3 text-[15px] leading-relaxed text-slate-500">
+                <EventInfo className="mt-4" />
+                <p className="mt-4 text-[15px] leading-relaxed text-slate-500">
                   Preencha seus dados abaixo para confirmar sua participação.
                 </p>
               </div>
-
-              <EventInfo className="mt-6" />
 
               <form
                 onSubmit={handleSubmit(onSubmit)}

@@ -69,7 +69,7 @@ export default function RootLayout({
         <div
           className="movimento-art"
           aria-hidden="true"
-          style={{ backgroundImage: `url(${asset("/solys-movimento-bg.png")})` }}
+          style={{ backgroundImage: `url(${asset("/solys-movimento-watermark.png")})` }}
         />
         {children}
       </body>

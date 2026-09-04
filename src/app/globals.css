@@ -32,12 +32,12 @@ body {
   inset: 0;
   z-index: -1;
   background-repeat: no-repeat;
-  background-position: center 12%;
-  background-size: min(1100px, 130%) auto;
-  opacity: 0.62;
+  background-position: center 44%;
+  background-size: min(940px, 120%) auto;
+  opacity: 0.09;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(60% 60% at 50% 30%, #000 55%, transparent 100%);
-  mask-image: radial-gradient(60% 60% at 50% 30%, #000 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(70% 65% at 50% 45%, #000 50%, transparent 100%);
+  mask-image: radial-gradient(70% 65% at 50% 45%, #000 50%, transparent 100%);
 }
 
 /* Remove aparência nativa dos números em inputs */
