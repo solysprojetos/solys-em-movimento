@@ -16,9 +16,7 @@ const sora = Sora({
   display: "swap",
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://solysprojetos.github.io/solys-em-movimento";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solys.online";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

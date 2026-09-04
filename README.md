@@ -95,39 +95,35 @@ GitHub Actions (`.github/workflows/deploy.yml`) a cada push. O envio da
 inscrição vai direto do navegador para o Supabase usando a chave pública
 (anon) — protegido por RLS.
 
-- URL padrão: `https://solysprojetos.github.io/solys-em-movimento/`
-- O `actions/configure-pages` calcula o *base path* automaticamente (usa
-  `/solys-em-movimento` no domínio do GitHub e a raiz quando há domínio
-  próprio configurado).
+- Domínio de produção: **https://solys.online** (arquivo `public/CNAME`)
+- O `actions/configure-pages` calcula o *base path* automaticamente (raiz no
+  domínio próprio; `/solys-em-movimento` no domínio do GitHub).
 
-### Domínio próprio
+### Domínio próprio (`solys.online`)
 
-1. No GitHub: **Settings → Pages → Custom domain**, informe seu domínio e salve
-   (o GitHub grava o arquivo `CNAME` e emite o certificado HTTPS).
-2. Configure o DNS no seu provedor:
-
-   **Subdomínio** (ex.: `inscricao.seudominio.com.br`) — registro CNAME:
+1. No GitHub: **Settings → Pages → Custom domain** = `solys.online` → Save.
+2. DNS no registrador do domínio (raiz/apex) — registros **A**:
 
    ```
-   Tipo: CNAME   Nome: inscricao   Valor: solysprojetos.github.io
+   @  A  185.199.108.153
+   @  A  185.199.109.153
+   @  A  185.199.110.153
+   @  A  185.199.111.153
    ```
 
-   **Domínio raiz/apex** (ex.: `seudominio.com.br`) — registros A (IPv4):
+   Opcional (IPv6) — registros **AAAA**:
 
    ```
-   185.199.108.153
-   185.199.109.153
-   185.199.110.153
-   185.199.111.153
+   @  AAAA  2606:50c0:8000::153
+   @  AAAA  2606:50c0:8001::153
+   @  AAAA  2606:50c0:8002::153
+   @  AAAA  2606:50c0:8003::153
    ```
 
-   e, opcionalmente, AAAA (IPv6):
+   Recomendado — `www` redirecionando para a raiz:
 
    ```
-   2606:50c0:8000::153
-   2606:50c0:8001::153
-   2606:50c0:8002::153
-   2606:50c0:8003::153
+   www  CNAME  solysprojetos.github.io
    ```
 
-3. Aguarde a propagação do DNS e marque **Enforce HTTPS** em Settings → Pages.
+3. Após a propagação do DNS, marque **Enforce HTTPS** em Settings → Pages.
