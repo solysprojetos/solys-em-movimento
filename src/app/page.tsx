@@ -1,4 +1,4 @@
-import { RegistrationCard } from "@/components/RegistrationCard";
+import { SuggestionCard } from "@/components/SuggestionCard";
 
 export default function Home() {
   const ano = new Date().getFullYear();
@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main className="flex min-h-[100dvh] flex-col items-center justify-center px-4 py-10 sm:py-14">
       <div className="w-full flex-1 flex items-center justify-center">
-        <RegistrationCard />
+        <SuggestionCard />
       </div>
 
       <footer className="mt-8 text-center text-xs leading-relaxed text-slate-400/80">
