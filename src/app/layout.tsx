@@ -20,14 +20,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://solys.online";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Solys em Movimento | Inscrição",
+  title: "Solys em Movimento | Sugestões",
   description:
-    "Faça sua inscrição no Solys em Movimento. Preencha seus dados, escolha o tamanho da camisa e confirme sua participação.",
+    "Deixe sua sugestão para o próximo Solys em Movimento.",
   applicationName: "Solys em Movimento",
   authors: [{ name: "Solys — Gestão Administrativa" }],
   openGraph: {
-    title: "Solys em Movimento | Inscrição",
-    description: "Garanta sua vaga no Solys em Movimento.",
+    title: "Solys em Movimento | Sugestões",
+    description: "Deixe sua sugestão para o próximo Solys em Movimento.",
     type: "website",
     locale: "pt_BR",
     images: [
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solys em Movimento | Inscrição",
-    description: "Garanta sua vaga no Solys em Movimento.",
+    title: "Solys em Movimento | Sugestões",
+    description: "Deixe sua sugestão para o próximo Solys em Movimento.",
     images: ["/solys-movimento-bg.png"],
   },
   robots: { index: true, follow: true },
